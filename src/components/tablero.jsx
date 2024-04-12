@@ -1,23 +1,25 @@
-import { useState } from 'react'
+import { useBoard } from '../customHook/useBoard'
 import { Casilla } from './casilla'
-
-const TURN = {
-  X: '×',
-  O: '○'
-}
+import { Menu } from './menu'
+import { Tablon } from './tablon'
 
 export function Tablero () {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, newTurn] = useState(TURN.X)
+  const { board, handleclick, turn } = useBoard()
   return (
-    <ul className='grid grid-cols-3 grid-rows-3 gap-2 p-2'>
-      {board.map((value, index) => {
-        return (
-          <li key={index}>
-            <Casilla>{board[index]}</Casilla>
-          </li>
-        )
-      })}
-    </ul>
+    <>
+      <Menu />
+      <ul className='grid grid-cols-3 grid-rows-3 gap-2 p-2 self-center'>
+        {board.map((value, index) => {
+          return (
+            <li key={index}>
+              <Casilla index={index} handle={handleclick}>{board[index]}</Casilla>
+            </li>
+          )
+        })}
+      </ul>
+      <Tablon>
+        {turn}
+      </Tablon>
+    </>
   )
 }
