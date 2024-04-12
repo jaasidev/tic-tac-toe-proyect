@@ -4,10 +4,10 @@ import { Menu } from './menu'
 import { Tablon } from './tablon'
 
 export function Tablero () {
-  const { board, handleclick, turn } = useBoard()
+  const { board, handleclick, turn, handleCharge } = useBoard()
   return (
     <>
-      <Menu />
+      <Menu actions={handleCharge} />
       <ul className='grid grid-cols-3 grid-rows-3 gap-2 p-2 self-center'>
         {board.map((value, index) => {
           return (
