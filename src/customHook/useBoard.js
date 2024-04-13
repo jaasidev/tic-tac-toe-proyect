@@ -26,7 +26,9 @@ export function useBoard () {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(TURN.X)
   const [winner, setWinner] = useState(null)
-  let firsundo = false
+  const [undo, setUndo] = useState(null)
+  const newTurn = turn === TURN.X ? TURN.O : TURN.X
+
   const handleclick = (index) => {
     if (board[index] !== null || winner) return
 
@@ -44,27 +46,25 @@ export function useBoard () {
       setWinner(true)
       return
     }
-    const newTurn = turn === TURN.X ? TURN.O : TURN.X
+
     setTurn(newTurn)
-    firsundo = false
+    setUndo(true)
   }
 
   const handleCharge = () => {
     if (winner !== null) return
-    if (!firsundo) {
-      const newTurn = turn === TURN.X ? TURN.O : TURN.X
+    if (undo) {
+      setBoard(localStorage.getItem('board').split(',').map((value) => value === '' ? null : value))
       setTurn(newTurn)
-      firsundo = false
-      setBoard(localStorage.getItem('board').split(',').map((value) => {
-        return value === '' ? null : value
-      }))
-      firsundo = true
+      setUndo(null)
     }
+    return null
   }
   const restart = () => {
     setBoard(Array(9).fill(null))
     setTurn(TURN.X)
     setWinner(null)
+    setUndo(null)
   }
 
   return {
