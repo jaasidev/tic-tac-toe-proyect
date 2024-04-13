@@ -1,10 +1,11 @@
 import { useBoard } from '../customHook/useBoard'
 import { Casilla } from './casilla'
+import { Finish } from './finishCard'
 import { Menu } from './menu'
 import { Tablon } from './tablon'
 
 export function Tablero () {
-  const { board, handleclick, turn, handleCharge } = useBoard()
+  const { board, handleclick, turn, handleCharge, winner, restart } = useBoard()
   return (
     <>
       <Menu actions={handleCharge} />
@@ -20,6 +21,7 @@ export function Tablero () {
       <Tablon>
         {turn}
       </Tablon>
+      <Finish last={turn} gana={winner} restart={restart} />
     </>
   )
 }

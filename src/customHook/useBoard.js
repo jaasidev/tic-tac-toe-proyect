@@ -58,8 +58,13 @@ export function useBoard () {
       firsundo = true
     }
   }
+  const restart = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURN.X)
+    setWinner(null)
+  }
 
   return {
-    board, handleclick, turn, handleCharge
+    board, handleclick, turn, handleCharge, winner, restart
   }
 }
