@@ -1,7 +1,7 @@
 import { useState } from 'react'
 const TURN = {
-  X: '×',
-  O: '○'
+  X: '❌',
+  O: '⭕'
 }
 
 const winnerCombos = [
@@ -50,8 +50,11 @@ export function useBoard () {
   }
 
   const handleCharge = () => {
-    if (winner) return
+    if (winner !== null) return
     if (!firsundo) {
+      const newTurn = turn === TURN.X ? TURN.O : TURN.X
+      setTurn(newTurn)
+      firsundo = false
       setBoard(localStorage.getItem('board').split(',').map((value) => {
         return value === '' ? null : value
       }))

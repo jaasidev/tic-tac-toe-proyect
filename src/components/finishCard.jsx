@@ -2,7 +2,7 @@ import { Over } from './Icons'
 
 export function Finish ({ last, gana, restart }) {
   const isShow = gana !== null
-  const personalizacion = isShow ? 'absolute w-96 h-60 sm:w-[500px] sm:h-96 flex flex-col justify-center gap-8 border m-auto inset-0 items-center bg-slate-900 border-slate-600 rounded-lg' : 'hidden'
+  const personalizacion = isShow ? 'absolute w-96 h-60 sm:w-[500px] sm:h-96 flex flex-col justify-evenly border m-auto inset-0 items-center bg-slate-900 border-slate-600 rounded-lg' : 'hidden'
   const message = gana ? `Gano ${last}` : 'Empate'
 
   const handleclick = () => {
